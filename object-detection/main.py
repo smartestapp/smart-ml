@@ -327,7 +327,7 @@ def compute_bquad(mask, return_box=False):
         return lefttop_coord, righttop_coord, rightbottom_coord, leftbottom_coord
 
 
-### (7) PREDICT & VISUALIZE ###
+### (8) PREDICT & VISUALIZE ###
 if not os.path.exists(os.path.join('output', OUTPUT_FOLDERNAME)):
     os.makedirs(os.path.join('output', OUTPUT_FOLDERNAME))
 
