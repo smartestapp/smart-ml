@@ -1,0 +1,31 @@
+# `object-detection`
+
+This folder contains code and utilities for training and evaluation of, running inference on, and deploying object detection models. **NOTE**: We may use instance segmentation and object detection interchangably in our documents. These all refer to the Mask-RCNN model currently in use. The Mask-RCNN model is used for extracting membranes from **raw** input images of test kits. Here, **raw** means the original input image acquired from end users. Besides this core task of extraction, we use the object detection model to do a variety of side tasks such as i) checking expected membrane localization, and ii) extracting the sample-inlet region for checking if it has blood. The `main.py` is the main script for running object detection. [*Object Detection Training & Evaluation Documentation*](https://docs.google.com/document/d/1Fr7jmvq7pT32gJiXAZSnoXWM-ILXang1Cnx0l-aXoaY/edit?usp=sharing) gos over the **training & evaluation** processes for object detection.[*Cloud Pipeline Inference Documentation*](https://docs.google.com/document/d/1Lj-oPvLd338PodmBPKz50tBA_p9gLbAnB81T9-gMYDA/edit?usp=sharing) talks about the tasks and available features in `main.py` for **inference** in more detail. **NOTE**: `lambda_functions/` directory and the respective `lambda_function.py` of each test kit contains code that is adopted from `main.py`. The only major changes between these and `main.py` should be variable names and references that were modified to work with AWS Lambda environment.
+
+## Contents
+
+* `custom_utils/`: Custom utils for object detection
+	* `data_utils.py`: Contains the Pytorch dataset `LFADataset()` for data management and data loading, and includes specification of data transformations. The `get_transform()` function in particular defines the data transformations that will be applied during training.
+	* `model_utils.py`: Consists of `get_instance_segmentation_model()` which initializes the instance segmentation to be used.
+	* `transforms.py`: Our custom-defined transformations. For object detection, we can't rely directly on `torchvision.transforms` or `imgaug` and other typical image transformation submodules and libraries, and we have to define our own transformations. This is mostly because we apply the transformations both to inputs / images and labels / masks.
+* `data/`: Placeholder data folder for storing **raw** input images of test kits. The **raw** input images within this folder should be placed in a subfolder with a descriptive name. For example, `btnx-raw-train` for **raw** BTNx test kit images to be used for training. The path of the desired subfolder is configured with `DATA_FOLDERNAME` variable in `main.py`
+* `deployment/`: Files for deployment to cloud. **NOTE**: Before running the code within this sub-folder, make sure to place the `.pt` or `.pth` file of the saved object detection model here.
+	* `deploy.sh`: This bash script creates a `.mar` file for the outlier model, and subsequently starts `torchserve` for local deployment. The `.mar` file will be later deployed to AWS SageMaker. **NOTE**: Make sure to replace `--serialized-file ../saved_models/maskrcnn_weights.pth` with the desired saved model filepath.
+	* `kill.sh`: Kills `torchserve` and deletes the temporary folders `model_store` and `logs`.
+	* `index_to_name.json`: This assigns names to the detected object types, and must match the `NUM_CLASSES` variable in `object-detection/main.py`. Currently, the object classes we have are 1) Background, 2) Kit, and 3) Membrane. Identifying the background, i.e. everything except the kit and the membrane, is a common setup. Therefore, the actual object classes are the kit and the membrane.
+	* `maskrcnn_handler.py`: Handles the inference of the deployed model.
+	* `maskrcnn_model.py`: Contains the implementation of the model.
+	* `test.sh`: Bash script for testing. Feel free to change this to match different tests you want to perform.
+* `output/`: Placeholder output folder for storing membranes of the processed input images. The extracted membranes will be placed in subfolders and the name of the subfolder is configured with `OUTPUT_FOLDERNAME` in `main.py`.
+* `saved_models/`: Placeholder folder for storing saved model files, which will usually have the extension of `.pt` or `.pth` (PyTorch-specific).
+* `coco_eval.py`: Utilities and helper methods for evaluating object detection models from `pycocotools`. You might need to modify this file and specifically `evaluate()` and `CocoEvaluator()` if you want to change the details or displays of performance metrics.
+* `coco_utils.py`: Object detection evaluation and data loading utilities from `pycocotools`.
+* `engine.py`: Key methods for training & evaluation of object detection models. Check `train_one_epoch()` method to see the training procedure.
+* `kit_data.json`: JSON that contains manufacturer specs for various kits. Make sure this is the most up-to-date version.
+* `main.py`: The `main.py` is the main script for running object detection.
+* `pipeline_demo.pdf`: This is a PDF that goes over certain key features in the object detection inference pipeline.
+* `utils.py`:
+
+* `main.py`: Main script for training, evaluation, and running inference on object detection models. More details about this very key script can be found in [*Object Detection Training & Evaluation Documentation*](https://docs.google.com/document/d/1Fr7jmvq7pT32gJiXAZSnoXWM-ILXang1Cnx0l-aXoaY/edit?usp=sharing) and [*Cloud Pipeline Inference Documentation*](https://docs.google.com/document/d/1Lj-oPvLd338PodmBPKz50tBA_p9gLbAnB81T9-gMYDA/edit?usp=sharing).
+* `utils.py`: Various utils (e.g. for distributed training, metric logging, etc.) for object detection from `pycocotools`.
+
