@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  aconagtestpredict:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: ''
+      MemorySize: 1024
+      Timeout: 30
+      Role: 'arn:aws:iam::364546270619:role/lambda-function-role'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /aconag-test-predict
+            Method: ANY
+        Api2:
+          Type: Api
+          Properties:
+            Path: /aconagtestpredict
+            Method: POST
+      Environment:
+        Variables:
+          DOWNLOAD_BUCKET: sagemaker-us-east-2-364546270619
+          PYTHONPATH: /opt/python/lib/python3.7/site-packages/
+          KIT_MASK_THRESHOLD: '0.85'
+          MAX_HEIGHT: '800'
+          ANGLE_CALCULATION_METHOD: membrane_mask
+          MEMBRANE_MASK_THRESHOLD: '0.85'
+          UPLOAD_BUCKET: sagemaker-us-east-2-364546270619
+          TEST_ID: aconag
+          INLET_LOCALIZATION_VARIABILITY: '0.15'
+          INLET_REDNESS_THRESHOLD: '4'
+          MEMBRANE_BOX_THRESHOLD: '0.85'
+          KIT_BOX_THRESHOLD: '0.85'
+          KIT_DATA_JSON_PATH: misc/aconag_data.json
+          MEMBRANE_LOCALIZATION_THRESHOLD: '0.60'
+          SECRET_ACCESS_KEY: ffQx7IzCrvCrTpLApWWOwaBqwYuQQuh8Xedql7sA
+          ACCESS_KEY_ID: AKIAVJYFGUWNZMZGAGRW
+          READ_IMAGE_BUCKET: sialabkitimages
+          DETECTION_ENDPOINT_NAME: aconag-maskrcnn
+          CLASSIFICATION_ENDPOINT_NAME: aconag-classifier
+          ANGLE_THRESHOLD: '20'
+      Layers:
+        - 'arn:aws:lambda:us-east-2:364546270619:layer:cv2:3'
+        - 'arn:aws:lambda:us-east-2:364546270619:layer:sklearn:6'

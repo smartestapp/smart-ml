@@ -1,0 +1,44 @@
+{
+    "dimensions": {
+        "aspect_ratio": 0.28,
+        "membrane": {
+            "x": 0.43,
+            "y": 0.34,
+            "w": 0.16,
+            "h": 0.22
+        },
+        "zones": {
+            "n": 2,
+            "zone1": {
+                "x": 0.0,
+                "y": 0.08,
+                "w": 1.0,
+                "h": 0.41
+            },
+            "zone2": {
+                "x": 0.0,
+                "y": 0.5,
+                "w": 1.0,
+                "h": 0.43
+            }
+        },
+        "indicator": {
+            "w": 1.0,
+            "h": 0.08
+        }
+    },
+    "diagnosis_mapping": {
+        "(1, 0)": 0,
+        "(1, 1)": 1,
+        "(0, 0)": 99,
+        "(0, 1)": 99
+    },
+    "sample_inlet": {
+        "diameter/width": 0.16,
+        "diameter/height": 0.04,
+        "top_to_center": 0.79,
+        "bottom_to_center": 0.21,
+        "right_to_center": 0.50
+    },
+    "ratio":["(0.05, 0.3)","(0.2, 0.7)"]
+}
