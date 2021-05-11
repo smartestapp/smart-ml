@@ -15,3 +15,5 @@ This folder contains misc documents that can be useful for various tasks.
 * `resize.py`: A script to resize images by capping them at maximum 800 pixels of height, and adjusting the width in proportion. The object detection model has a processing limit and therefore downsampling to 800 pixels might be a useful operation.
 
 * `jpg_to_png.py`: A script to convert JPG / JPEG images to PNG format. This script may come in handy for `object-detection/`; we usually want the **masks** to be in PNG format.
+
+* `aws_api_gateway_config.png`: Showcases how the API Gateway Console looks once you have created a new resource and a new method under that for a new test kit.
