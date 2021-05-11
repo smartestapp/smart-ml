@@ -1,0 +1,31 @@
+# Build Spec for AWS CodeBuild CI
+
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - apt-get update
+      - apt-get install -y curl
+      - pip install pip -U
+      - pip install future
+      - pip install Pillow
+      - pip install pytest
+      - pip install wheel
+      - pip install twine
+      - pip install pytest-mock -U
+      - pip install requests
+      - pip install psutil
+
+  build:
+    commands:
+      - ./torchserve_sanity.sh
+      - cd serving-sdk/ && mvn clean deploy && cd ../
+
+artifacts:
+  files:
+    - dist/*.whl
+    - model_archiver/dist/*.whl
+    - frontend/server/build/reports/**/*
+    - frontend/modelarchive/build/reports/**/*
+    - frontend/cts/build/reports/**/*
