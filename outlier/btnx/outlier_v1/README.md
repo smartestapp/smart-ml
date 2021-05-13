@@ -12,6 +12,6 @@ This folder contains the code for BTNx outlier detection / anomaly detection mod
 	* `deploy.sh`: This bash script creates a `.mar` file for the outlier model, and subsequently starts `torchserve` for local deployment. The `.mar` file will be later deployed to AWS SageMaker. **NOTE**: Make sure to replace `--serialized-file btnx_outlier.pt` with the desired saved model filepath. Other variables to play around with are `--model-name` for `torch-model-archiver` and `--models` for `torchserve`. Make sure that it follows the following rule: `--models {--model-name}={--model-name}.mar`.
 	* `kill.sh`: Kills `torchserve` and deletes the temporary folders `model_store` and `logs`.
 	* `kit_data.json`: JSON that contains manufacturer specs for various kits. Make sure this is the most up-to-date version.
-	* `outlier_handler.py`: Handles the inference of the deployed model.
+	* `outlier_handler.py`: Handles the inference of the deployed model. **NOTE**: Make sure to change the `self.model_filename` to the desired saved model filepath.
 	* `outlier_model.py`: Contains the implementation of the model.
 	* `test.sh`: Bash script for testing. Feel free to change this to match different tests you want to perform.

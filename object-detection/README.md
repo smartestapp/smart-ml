@@ -13,7 +13,7 @@ This folder contains code and utilities for training and evaluation of, running 
 	* `deploy.sh`: This bash script creates a `.mar` file for the object detection model, and subsequently starts `torchserve` for local deployment. The `.mar` file will be later deployed to AWS SageMaker. **NOTE**: Make sure to replace `--serialized-file ../saved_models/maskrcnn_weights.pth` with the desired saved model filepath. Other variables to play around with are `--model-name` for `torch-model-archiver` and `--models` for `torchserve`. Make sure that it follows the following rule: `--models {--model-name}={--model-name}.mar`.
 	* `kill.sh`: Kills `torchserve` and deletes the temporary folders `model_store` and `logs`.
 	* `index_to_name.json`: This assigns names to the detected object types, and must match the `NUM_CLASSES` variable in `object-detection/main.py`. Currently, the object classes we have are 1) Background, 2) Kit, and 3) Membrane. Identifying the background, i.e. everything except the kit and the membrane, is a common setup. Therefore, the actual object classes are the kit and the membrane.
-	* `maskrcnn_handler.py`: Handles the inference of the deployed model.
+	* `maskrcnn_handler.py`: Handles the inference of the deployed model. **NOTE**: Make sure to change the `self.model_filename` to the desired saved model filepath.
 	* `maskrcnn_model.py`: Contains the implementation of the model.
 	* `test.sh`: Bash script for testing. Feel free to change this to match different tests you want to perform.
 * `output/`: Placeholder output folder for storing membranes of the processed input images. The extracted membranes will be placed in subfolders and the name of the subfolder is configured with `OUTPUT_FOLDERNAME` in `main.py`.
