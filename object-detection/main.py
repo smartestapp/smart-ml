@@ -37,10 +37,10 @@ print('DEVICE: ', DEVICE)
 NUM_CLASSES = 3  # ('background', 'kit', 'membrane')
 BATCH_SIZE = 2  # Feel free to increase this to the limit that your GPU handles
 HIDDEN_SIZE = 256  # Hidden layer size for our Mask-RCNN model
-LEARNING_RATE = 5E-6  # NOTE: Pre-training is done with 5E-5 and finetuning is done with 5E-6, 1E-6, or 5E-7
+LEARNING_RATE = 5E-6  # NOTE: Pretraining is done with 5E-5 and finetuning is done with 5E-6, 1E-6, or 5E-7
 SEED = 42  # Set seeds for reproducibility
 RESIZE = True  # This can be kept as is; we usually need to resize images so they fit into the GPU for training
-SHOTS = None  # Set this to a integer if you only want to train with a few number of images (e.g. SHOTS=5 => only 5 images are used)
+SHOTS = None  # Set this to a integer if you only want to train with a few images (e.g. SHOTS=5 => only 5 images are used)
 NUM_REPEATS = 1  # How many times you want to repeat the experiment (e.g. NUM_REPEATS=2 => model is trained two times for NUM_EPOCHS to get a more consistent performance metric)
 NUM_EPOCHS = 100 # Usuaully we use 100 here, but NOTE that you should set this to 0 if you only want to run inference on a new set of images (i.e. skip training)
 ONLY_EVAL = False  # Set this to True if you want to evaluate the 'test' or 'val' set without training
@@ -53,15 +53,15 @@ OUTPUT_FOLDERNAME = 'nih_quidelag_membranes'  # Will be created inside 'output' 
 SPECIFIC_FILENAME = None  # To investigate a single image, give a image filename here
 SHOW_IMGS = False  # Set True to flash intermediate outputs (e.g. masks, bounding boxes, etc.) to screen
 RESIZE_TO_800 = True  # Set True to cap images by max. 800 pixels high while inputting them to Mask R-CNN
-USE_ORIGINAL_RESOLUTION = True  # Set True to test oiriginal / high res. output for higher quality input to classification (Jiawei's model)
+USE_ORIGINAL_RESOLUTION = True  # Set True to test original / high res. output for higher quality input to classification (Jiawei's model)
 SAVE = True  # Set True to to save the resultant membranes
 OVERWRITE = False  # Set True to overwrite membrane files inside `OUTPUT_FOLDERNAME` if there is a name-match
 TEST_ID = 'quidelag'  # ID of the test kit, must match an entry in `kit_data.json`
-ANGLE_CALCULATION_METHOD = 'kit_mask' # Choose one from 'membrane_mask' and 'kit_mask; which mask to base angle calculation on
+ANGLE_CALCULATION_METHOD = 'kit_mask' # Choose one from 'membrane_mask' and 'kit_mask'; which mask to base angle calculation on
 # NOTE: Check which method we choose for each `TEST_ID` from AWS Lambda Functions and their Environment Variables
 ANGLE_THRESHOLD = 20  # Based on the angle and this set threshold, we either use rotation or homography to get the correct orientation
 MEMBRANE_LOCALIZATION_THRESHOLD = 0.60  # Set threshold of overlap percentage between predicted membrane mask and expected membrane mask given by manufacturer specs
-INSET_REDNESS_THRESHOLD = 4  # Treshold for measuring the redness in the inset / inlet location of the membrane
+INSET_REDNESS_THRESHOLD = 4  # Threshold for measuring the redness in the inset / inlet location of the membrane
 INLET_LOCALIZATION_VARIABILITY = 0.15  # +/- error or variability when taking the manufacturer specs for inlet into consideration
 INLET_CHECK = False # Set True to enable checking inlet / inset and ensuring there is some redness (i.e. user blood)
 SAVE_NPY = False  # Set to True to save .npy format membranes alongisde .jpg format membranes
@@ -85,7 +85,7 @@ LOAD_PATH = os.path.join('saved_models', 'TEMP.pth')  # Change 'TEMP.pth' to des
 
 # (2) Initialize and merge datasets
 # Specify datasets for the focus group/test kit
-btnx_train_dataset = get_lfa_dataset(name='btnx', split='train', train=False, resize=RESIZE, shots=SHOTS, seed=SEED)
+btnx_train_dataset = get_lfa_dataset(name='btnx', split='train', train=True, resize=RESIZE, shots=SHOTS, seed=SEED)
 # The training datasets loads inputs / images from `btnx_train_images` and labels / masks from `btnx_train_masks` with this line.
 btnx_test_dataset = get_lfa_dataset(name='btnx', split='test', train=False, resize=RESIZE, seed=SEED)
 # The test datasets loads inputs / images from `btnx_test_images` and labels / masks from `btnx_test_masks` with this line.
