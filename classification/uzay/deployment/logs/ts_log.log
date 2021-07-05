@@ -1,0 +1,37 @@
+2021-07-02 18:54:51,105 [INFO ] main org.pytorch.serve.ModelServer - 
+TS Home: /opt/anaconda3/lib/python3.8/site-packages
+Current directory: /Users/sanat/Documents/smart-ml/classification/uzay/deployment
+Temp directory: /var/folders/h6/47vxjc6d6fz5lyjzdcwrnn9w0000gp/T/
+Number of GPUs: 0
+Number of CPUs: 4
+Max heap size: 2048 M
+Python executable: /opt/anaconda3/bin/python3
+Config file: logs/config/20210702185435231-shutdown.cfg
+Inference address: http://127.0.0.1:8080
+Management address: http://127.0.0.1:8081
+Model Store: /Users/sanat/Documents/smart-ml/classification/uzay/deployment/model_store
+Initial Models: oraquick_classifier.mar
+Log dir: /Users/sanat/Documents/smart-ml/classification/uzay/deployment/logs
+Metrics dir: /Users/sanat/Documents/smart-ml/classification/uzay/deployment/logs
+Netty threads: 0
+Netty client threads: 0
+Default workers per model: 4
+Blacklist Regex: N/A
+Maximum Response Size: 6553500
+Maximum Request Size: 6553500
+2021-07-02 18:54:51,117 [INFO ] main org.pytorch.serve.snapshot.SnapshotManager - Started restoring models from snapshot {
+  "name": "20210702185435231-shutdown.cfg",
+  "modelCount": 0,
+  "created": 1625266475232,
+  "models": {}
+}
+2021-07-02 18:54:51,134 [INFO ] main org.pytorch.serve.snapshot.SnapshotManager - Validating snapshot 20210702185435231-shutdown.cfg
+2021-07-02 18:54:51,135 [INFO ] main org.pytorch.serve.snapshot.SnapshotManager - Validated snapshot 20210702185435231-shutdown.cfg
+2021-07-02 18:54:51,135 [WARN ] main org.pytorch.serve.snapshot.SnapshotManager - Model snapshot is empty. Starting TorchServe without initial models.
+2021-07-02 18:54:51,137 [INFO ] main org.pytorch.serve.ModelServer - Initialize Inference server with: KQueueServerSocketChannel.
+2021-07-02 18:54:51,258 [INFO ] main org.pytorch.serve.ModelServer - Inference API bind to: http://127.0.0.1:8080
+2021-07-02 18:54:51,258 [INFO ] main org.pytorch.serve.ModelServer - Initialize Management server with: KQueueServerSocketChannel.
+2021-07-02 18:54:51,259 [INFO ] main org.pytorch.serve.ModelServer - Management API bind to: http://127.0.0.1:8081
+2021-07-02 18:56:29,460 [INFO ] KQueueEventLoopGroup-2-2 org.pytorch.serve.ModelServer - Management model server stopped.
+2021-07-02 18:56:29,460 [INFO ] KQueueEventLoopGroup-2-1 org.pytorch.serve.ModelServer - Inference model server stopped.
+2021-07-02 18:56:31,685 [INFO ] main org.pytorch.serve.ModelServer - Torchserve stopped.
