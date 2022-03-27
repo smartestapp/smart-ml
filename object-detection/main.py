@@ -48,16 +48,16 @@ ONLY_EVAL = False  # Set this to True if you want to evaluate the 'test' or 'val
 
 # (1.2) Set hyperparameters for inference
 ###################################################################################################
-DATA_FOLDERNAME = 'nih_quidelagrsv_raw'  # Must be inside 'data' folder
-OUTPUT_FOLDERNAME = 'nih_quidelag_membranes'  # Will be created inside 'output' folder
+DATA_FOLDERNAME = 'CovidImages'  # Must be inside 'data' folder
+OUTPUT_FOLDERNAME = 'CovidTest_membranes'  # Will be created inside 'output' folder
 SPECIFIC_FILENAME = None  # To investigate a single image, give a image filename here
 SHOW_IMGS = False  # Set True to flash intermediate outputs (e.g. masks, bounding boxes, etc.) to screen
 RESIZE_TO_800 = True  # Set True to cap images by max. 800 pixels high while inputting them to Mask R-CNN
 USE_ORIGINAL_RESOLUTION = True  # Set True to test original / high res. output for higher quality input to classification (Jiawei's model)
 SAVE = True  # Set True to to save the resultant membranes
 OVERWRITE = False  # Set True to overwrite membrane files inside `OUTPUT_FOLDERNAME` if there is a name-match
-TEST_ID = 'quidelag'  # ID of the test kit, must match an entry in `kit_data.json`
-ANGLE_CALCULATION_METHOD = 'kit_mask' # Choose one from 'membrane_mask' and 'kit_mask'; which mask to base angle calculation on
+TEST_ID = 'aconag'  # ID of the test kit, must match an entry in `kit_data.json`
+ANGLE_CALCULATION_METHOD = 'membrane_mask' # Choose one from 'membrane_mask' and 'kit_mask'; which mask to base angle calculation on
 # NOTE: Check which method we choose for each `TEST_ID` from AWS Lambda Functions and their Environment Variables
 ANGLE_THRESHOLD = 20  # Based on the angle and this set threshold, we either use rotation or homography to get the correct orientation
 MEMBRANE_LOCALIZATION_THRESHOLD = 0.60  # Set threshold of overlap percentage between predicted membrane mask and expected membrane mask given by manufacturer specs
@@ -76,8 +76,8 @@ PREDICTION_MEMBRANE_SEGMENTATION_THRESHOLD = 0.85  # Pixels that are below this 
 # (1.3) Set other hyperparameters (e.g. might be used for both training and evaluation etc.)
 #####################################################################################################
 CONTINUE = True
-SAVE_PATH = os.path.join('saved_models', 'TEMP.pth')  # Change 'TEMP.pth' to the desired model name (e.g. btnx_maskrcnn_weights.pth); only relevant for training
-LOAD_PATH = os.path.join('saved_models', 'TEMP.pth')  # Change 'TEMP.pth' to desired model path (e.g. oraquick_maskrcnn_weights.pth); relevant for both training and inference
+SAVE_PATH = os.path.join('saved_models', 'aconag_weights.pth')  # Change 'TEMP.pth' to the desired model name (e.g. btnx_maskrcnn_weights.pth); only relevant for training
+LOAD_PATH = os.path.join('saved_models', 'aconag_weights.pth')  # Change 'TEMP.pth' to desired model path (e.g. oraquick_maskrcnn_weights.pth); relevant for both training and inference
 # NOTE: `LOAD_PATH` can be used for finetuning on top of a pretrained model if `CONTINUE` global variable is set to True
 # LOAD_PATH = os.path.join('saved_models', 'oraquick_maskrcnn_weights.pth')  # This is a common choice for a pretrained model
 # LOAD_PATH = os.path.join('saved_models', 'btnx_maskrcnn_weights.pth')  # This is another common choice for a pretrained model
@@ -85,16 +85,16 @@ LOAD_PATH = os.path.join('saved_models', 'TEMP.pth')  # Change 'TEMP.pth' to des
 
 # (2) Initialize and merge datasets
 # Specify datasets for the focus group/test kit
-btnx_train_dataset = get_lfa_dataset(name='btnx', split='train', train=True, resize=RESIZE, shots=SHOTS, seed=SEED)
-# The training datasets loads inputs / images from `btnx_train_images` and labels / masks from `btnx_train_masks` with this line.
-btnx_test_dataset = get_lfa_dataset(name='btnx', split='test', train=False, resize=RESIZE, seed=SEED)
-# The test datasets loads inputs / images from `btnx_test_images` and labels / masks from `btnx_test_masks` with this line.
+aconag_train_dataset = get_lfa_dataset(name='aconag', split='train', train=True, resize=RESIZE, shots=SHOTS, seed=SEED)
+# The training datasets loads inputs / images from `aconag_train_images` and labels / masks from `aconag_train_masks` with this line.
+aconag_test_dataset = get_lfa_dataset(name='aconag', split='test', train=False, resize=RESIZE, seed=SEED)
+# The test datasets loads inputs / images from `aconag_test_images` and labels / masks from `aconag_test_masks` with this line.
 
 train_dataset = ConcatDataset([
-    btnx_train_dataset
+    aconag_train_dataset
 ])
 test_dataset = ConcatDataset([
-    btnx_test_dataset
+    aconag_test_dataset
 ])
 # NOTE: The concatenate various datasets for whatever reason, add items to the list within `ConcatDataset()`
 
