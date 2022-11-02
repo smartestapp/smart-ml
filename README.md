@@ -6,7 +6,7 @@ Within each directory inside this repository, you will find a `README.md` which 
 
 ## Contents
 
-* `classification/`: This is the main folder fo classification training, evaluation, and deployment. For the actual code for training and development, please contact Jiawei Ma from DVMM. An ideal setup would be to put the main training code directly under `classification`. You can update the README after this.
+* `classification/`: This is the main folder for classification evaluation. `classification/README.md` outlines the latest model development for classification. Please see `archive/classification/` for training and deployment. Please contact Jiawei Ma from DVMM in case you have any questions. An ideal setup would be to put the main training code directly under `classification`. You can update the README after this.
 
 * `data/`: Placeholder data folder for storing **raw** and membrane images. **NOTE**: There are many placeholder `data/` folders in this repository, but you can feel free to use this outermost folder for all operations. Alternatively, as different machine learning processes require different types of data, you might use the `data/` folder in each component.
 
