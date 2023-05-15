@@ -59,7 +59,7 @@ fastcache==1.1.0
 fastprogress==1.0.0
 filelock==3.0.12
 flake8==3.7.9
-Flask==1.1.1
+Flask==2.2.5
 fsspec==0.6.2
 future==0.18.2
 gevent==1.4.0
