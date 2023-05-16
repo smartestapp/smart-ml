@@ -35,9 +35,9 @@ Resources:
           OUTLIER_ENDPOINT_NAME: btnx-outlier
           KIT_DATA_JSON_PATH: misc/btnx_data.json
           MEMBRANE_LOCALIZATION_THRESHOLD: '0.45'
-          SECRET_ACCESS_KEY: ffQx7IzCrvCrTpLApWWOwaBqwYuQQuh8Xedql7sA
+          SECRET_ACCESS_KEY: SECRET_KEY
           OUTLIER_LOSS_THRESHOLD: '1.45'
-          ACCESS_KEY_ID: AKIAVJYFGUWNZMZGAGRW
+          ACCESS_KEY_ID: ACCESS_KEY
           READ_IMAGE_BUCKET: sialabkitimages
           DETECTION_ENDPOINT_NAME: btnx-maskrcnn
           CLASSIFICATION_ENDPOINT_NAME: btnx-classifier

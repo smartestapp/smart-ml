@@ -39,8 +39,8 @@ Resources:
           KIT_BOX_THRESHOLD: '0.85'
           KIT_DATA_JSON_PATH: misc/aconab_data.json
           MEMBRANE_LOCALIZATION_THRESHOLD: '0.50'
-          SECRET_ACCESS_KEY: ffQx7IzCrvCrTpLApWWOwaBqwYuQQuh8Xedql7sA
-          ACCESS_KEY_ID: AKIAVJYFGUWNZMZGAGRW
+          SECRET_ACCESS_KEY: SECRET_KEY
+          ACCESS_KEY_ID: ACCESS_KEY
           READ_IMAGE_BUCKET: sialabkitimages
           DETECTION_ENDPOINT_NAME: aconab-maskrcnn
           CLASSIFICATION_ENDPOINT_NAME: btnx-classifier
